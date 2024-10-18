@@ -1,0 +1,68 @@
+[project]
+description = "arquea"
+name = "arquea"
+readme = "README.md"
+version = "0.0.1"
+
+authors = [{name = "LichiMartinez", email = "ligabriel01.lm@gmail.com"}]
+dependencies = [
+  "pyTelegramBotAPI",
+  "python-dotenv",
+  "sqlalchemy",
+  "pydantic",
+  "psycopg2"
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff",
+  "flake8",
+  "flake8-pyproject",
+  "ipdb",
+  "pre-commit",
+]
+
+[project.scripts]
+arquea = "arquea:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.flake8]
+exclude = ['**/migrations/**']
+extend-ignore = ["E203"]
+ignore = ["E501", "F403", "E402", "E203", "W503", "Q000"]
+max-complexity = 12
+max-line-length = 120
+statistics = true
+
+[tool.ruff]
+exclude = ["test/data"]
+line-length = 120
+
+[tool.ruff.lint]
+# max-args = 20
+# good-names = ["i", "j", "k", "ex", "_", "e", "db", "df", "ms", "ts"]
+# ignore = ["E114", "C0115", "C0116","E0611", "R0902", "R0903", "R0913"]
+ignore = ["D100", "D101", "D102", "D103"]
+
+[tool.ruff.lint.flake8-unused-arguments]
+ignore-variadic-names = true
+
+[tool.mypy]
+disable_error_code = [
+  "attr-defined",
+]
+exclude = [
+  "tests/data",
+]
+ignore_missing_imports = true
+python_version = "3.12"
+
+markers = [
+  "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.coverage.run]
+omit = []
+
